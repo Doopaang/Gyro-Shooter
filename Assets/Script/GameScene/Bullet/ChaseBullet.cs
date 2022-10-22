@@ -12,7 +12,7 @@ public class ChaseBullet : Bullet
         targetDistance = (-GameManager.Instance.Player.transform.position).magnitude;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         vec = -transform.position;
 
@@ -22,7 +22,7 @@ public class ChaseBullet : Bullet
             Quaternion rotate = Quaternion.LookRotation(Vector3.forward, GameManager.Instance.Player.transform.position - transform.position);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotate, rotateSpeed * Time.timeScale);
         }
-        transform.Translate(Vector3.up * speed * Time.deltaTime);
+        transform.Translate(Vector3.up * speed * Time.fixedDeltaTime);
     }
 
     public void SetBullet(float floatValue)

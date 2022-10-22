@@ -11,14 +11,14 @@ public class Meter : MonoBehaviour
 
     private const float FADE_SPEED = 5.0f;
 
-    void Update()
+    void FixedUpdate()
     {
         speed -= DOWN_SPEED;
 
-        transform.Translate(Vector3.up * speed * Time.deltaTime);
+        transform.Translate(Vector3.up * speed * Time.fixedDeltaTime);
         if (speed < 0.0f)
         {
-            color.a -= FADE_SPEED * Time.deltaTime;
+            color.a -= FADE_SPEED * Time.fixedDeltaTime;
             text.color = color;
             if (color.a <= 0.0f)
             {
@@ -33,5 +33,9 @@ public class Meter : MonoBehaviour
         color = text.color;
 
         text.text = "-" + value;
+
+        Vector3 vec = transform.localPosition;
+        vec.z = 0.0f;
+        transform.localPosition = vec;
     }
 }

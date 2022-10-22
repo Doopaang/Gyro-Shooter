@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
         shooter.GetComponent<BulletSetting>().Active();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Skill();
         Move();
@@ -88,10 +88,13 @@ public class Player : MonoBehaviour
         float pos = Input.mousePosition.x;
         pos -= Screen.width * 0.5f;
         pos = pos / Screen.width;
-        float temp = pos * ANGLE;
+        float temp = pos * ANGLE * 0.05f;
 #endif
 #if UNITY_ANDROID
         float temp = Input.acceleration.x * ANGLE;
+#endif
+#if UNITY_EDITOR
+        temp *= 20.0f;
 #endif
         Camera.main.transform.RotateAround(Vector3.zero, Vector3.forward, temp);
         transform.RotateAround(Vector3.zero, Vector3.forward, temp);

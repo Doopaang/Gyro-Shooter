@@ -65,7 +65,7 @@ public class EnemyList : MonoBehaviour
         {
             time += Time.deltaTime;
             transform.Translate(Vector3.up * TIME_SPEED * Mathf.Sin(MOVE_SPEED * time));
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
     }
 
